@@ -142,6 +142,7 @@ function articleConstructor(title, date, firstParagraph, secondParagraph, thirdP
   article.classList.add('article');
   p.classList.add('date');
   expand.classList.add('expandButton');
+  article.classList.add('articleOpen');
 
   // add content
   h2.textContent = title;
@@ -152,7 +153,7 @@ function articleConstructor(title, date, firstParagraph, secondParagraph, thirdP
 
   // add event listener
   expand.addEventListener('click', e => {
-    
+    article.toggle('articleOpen')
   })
 
   return article
