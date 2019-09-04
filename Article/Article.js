@@ -166,23 +166,39 @@ function articleConstructor(title, date, firstParagraph, secondParagraph, thirdP
   para1.textContent = firstParagraph;
   para2.textContent = secondParagraph;
   para3.textContent = thirdParagraph;
-  expand.textContent = "Click to expand"
+  expand.textContent = "Click to expand";
 
   // add event listener
   expand.addEventListener('click', e => {
     article.classList.toggle('article-open');
 
-    // Stretch - Close Button
+    // Click to expand/close
     if (expand.textContent === "Click to expand") {
       expand.textContent = 'Click to close';
     } else if (expand.textContent === 'Click to close') {
-      article.style.display = 'none';
+      expand.textContent = "Click to expand";
     }
   })
 
+  //Expand button styling
   expand.style.backgroundColor = "#81C784"
   expand.style.color = "white";
   expand.style.borderRadius = '5px';
+
+
+  // Stretch - close button
+  const closeButton = document.createElement('button');
+  closeButton.classList.add('close');
+  article.appendChild(closeButton);
+  closeButton.addEventListener('click', e => {
+    article.style.display = 'none';
+  })
+
+  // CLose button styling 
+  closeButton.textContent = 'X'
+  closeButton.style.backgroundColor = "#DC143C";
+  closeButton.style.color = "white";
+
   
   
 
