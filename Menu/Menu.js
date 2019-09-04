@@ -48,7 +48,7 @@ function menuCreator(arr){
     const items = document.createElement('li');
     items.textContent = item;
     menuList.appendChild(items);
-  })      // adding 'create listing element' inside forLoop so each item gets its own listing not just one listing
+  })      
 
 
 
@@ -60,10 +60,7 @@ function menuCreator(arr){
   return menu
 }
 
-
-
 const header = document.querySelector('.header')
 header.appendChild(menuCreator(menuItems))
 
-// array - loop thourhg array - for each allow the function to create the button and then add the button 
 

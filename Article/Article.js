@@ -166,11 +166,25 @@ function articleConstructor(title, date, firstParagraph, secondParagraph, thirdP
   para1.textContent = firstParagraph;
   para2.textContent = secondParagraph;
   para3.textContent = thirdParagraph;
+  expand.textContent = "Click to expand"
 
   // add event listener
   expand.addEventListener('click', e => {
-    article.classList.toggle('article-open')
+    article.classList.toggle('article-open');
+
+    // Stretch - Close Button
+    if (expand.textContent === "Click to expand") {
+      expand.textContent = 'Click to close';
+    } else if (expand.textContent === 'Click to close') {
+      article.style.display = 'none';
+    }
   })
+
+  expand.style.backgroundColor = "#81C784"
+  expand.style.color = "white";
+  expand.style.borderRadius = '5px';
+  
+  
 
   return article
 }
