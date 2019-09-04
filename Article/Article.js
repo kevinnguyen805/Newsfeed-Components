@@ -126,6 +126,9 @@ const data = [
     <span class='expandButton'></span>
 </div> */
 
+// grab parental div
+const articles = document.querySelector('.articles')
+
 function articleConstructor(title, date, firstParagraph, secondParagraph, thirdParagraph){
   // create elements
   const article = document.createElement('div');
@@ -136,7 +139,7 @@ function articleConstructor(title, date, firstParagraph, secondParagraph, thirdP
   //append elements
   article.appendChild(h2);
   article.appendChild(p);
-  p.appendchild(expand);
+  p.appendChild(expand);
 
   //add classes
   article.classList.add('article');
@@ -158,6 +161,11 @@ function articleConstructor(title, date, firstParagraph, secondParagraph, thirdP
 
   return article
 }
+
+// step 4 - map over array creating a component for each object 
+data.forEach(item => {
+  articles.appendChild(articleConstructor(item.title, item.date, item.firstParagraph, item.secondParagraph, item.thirdParagraph))
+})
 
 
 // Step 2: Add an event listener to the expandButton span.This event listener should toggle the class 'article-open' on the 'article' div.
