@@ -85,6 +85,24 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Hipster Lingo',
+    date: 'Jan 18st, 2019',
+    firstParagraph: `Normcore selfies biodiesel kale chips vaporware selvage. Taxidermy poutine wayfarers man braid whatever, next level tacos viral pop-up tousled. Affogato lo-fi shoreditch, post-ironic raclette wayfarers bespoke street art offal hammock. Sriracha retro cloud bread, keytar venmo beard celiac hoodie cray blue bottle messenger bag air plant listicle tacos chartreuse. Sartorial cronut you probably haven't heard of them pok pok hot chicken, ramps tofu cold-pressed bespoke letterpress echo park listicle direct trade hell of green juice. Chia irony chartreuse venmo snackwave fanny pack marfa prism. Street art 90's +1 man bun. `,
+
+    secondParagraph: `Normcore truffaut vexillologist chicharrones pinterest. Pok pok lo-fi meditation, swag chillwave ennui literally. Organic affogato iPhone readymade lumbersexual, craft beer retro aesthetic cliche vexillologist cray yr kitsch street art. Tumeric man bun street art hammock irony small batch jianbing shaman lo-fi.`,
+
+    thirdParagraph: `Normcore cronut health goth prism chillwave. Hot chicken bespoke wayfarers synth stumptown vice normcore craft beer. Quinoa fixie heirloom church-key literally, subway tile four loko portland bicycle rights vape. Edison bulb deep v flexitarian heirloom, marfa art party actually church-key irony YOLO umami waistcoat. Cold-pressed cronut asymmetrical wolf normcore brunch.`
+  },
+  {
+    title: 'Anti-Hipster Lingo',
+    date: 'Jan 18st, 2019',
+    firstParagraph: `Normcore selfies biodiesel kale chips vaporware selvage. Taxidermy poutine wayfarers man braid whatever, next level tacos viral pop-up tousled. Affogato lo-fi shoreditch, post-ironic raclette wayfarers bespoke street art offal hammock. Sriracha retro cloud bread, keytar venmo beard celiac hoodie cray blue bottle messenger bag air plant listicle tacos chartreuse. Sartorial cronut you probably haven't heard of them pok pok hot chicken, ramps tofu cold-pressed bespoke letterpress echo park listicle direct trade hell of green juice. Chia irony chartreuse venmo snackwave fanny pack marfa prism. Street art 90's +1 man bun. `,
+
+    secondParagraph: `Normcore truffaut vexillologist chicharrones pinterest. Pok pok lo-fi meditation, swag chillwave ennui literally. Organic affogato iPhone readymade lumbersexual, craft beer retro aesthetic cliche vexillologist cray yr kitsch street art. Tumeric man bun street art hammock irony small batch jianbing shaman lo-fi.`,
+
+    thirdParagraph: `Normcore cronut health goth prism chillwave. Hot chicken bespoke wayfarers synth stumptown vice normcore craft beer. Quinoa fixie heirloom church-key literally, subway tile four loko portland bicycle rights vape. Edison bulb deep v flexitarian heirloom, marfa art party actually church-key irony YOLO umami waistcoat. Cold-pressed cronut asymmetrical wolf normcore brunch.`
   }
 ];
 
@@ -112,3 +130,87 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+// grab parental div
+const articles = document.querySelector('.articles')
+
+function articleConstructor(title, date, firstParagraph, secondParagraph, thirdParagraph){
+  // create elements
+  const article = document.createElement('div');
+  const h2 = document.createElement('h2');
+  const subheadline = document.createElement('p');
+  const expand = document.createElement('button');
+
+  // extra 3 paragraphs
+  const para1 = document.createElement('p');
+  const para2 = document.createElement('p');
+  const para3 = document.createElement('p');
+
+  //append elements
+  article.appendChild(h2);
+  article.appendChild(subheadline);
+  article.appendChild(para1);
+  article.appendChild(para2);
+  article.appendChild(para3);
+  article.appendChild(expand);
+
+  //add classes
+  article.classList.add('article');
+  subheadline.classList.add('date');
+  expand.classList.add('expandButton');
+
+
+  // add content
+  h2.textContent = title;
+  subheadline.textContent = date;
+  para1.textContent = firstParagraph;
+  para2.textContent = secondParagraph;
+  para3.textContent = thirdParagraph;
+  expand.textContent = "Click to expand";
+
+  // add event listener
+  expand.addEventListener('click', e => {
+    article.classList.toggle('article-open');
+
+    // Click to expand/close
+    if (expand.textContent === "Click to expand") {
+      expand.textContent = 'Click to close';
+    } else if (expand.textContent === 'Click to close') {
+      expand.textContent = "Click to expand";
+    }
+  })
+
+  //Expand button styling
+  expand.style.backgroundColor = "#81C784"
+  expand.style.color = "white";
+  expand.style.borderRadius = '5px';
+
+
+  // Stretch - close button
+  const closeButton = document.createElement('button');
+  closeButton.classList.add('close');
+  article.appendChild(closeButton);
+  closeButton.addEventListener('click', e => {
+    article.style.display = 'none';
+  })
+
+  // CLose button styling 
+  closeButton.textContent = 'X'
+  closeButton.style.backgroundColor = "#DC143C";
+  closeButton.style.color = "white";
+
+  
+  
+
+  return article
+}
+
+// step 4 - map over array creating a component for each object 
+data.forEach(item => {
+  articles.appendChild(articleConstructor(item.title, item.date, item.firstParagraph, item.secondParagraph, item.thirdParagraph))
+})
+
+// CLOSER LOOK AT .CLOSE 
+  // expand.classList.add('article-open'); - YOU DO NOT HAVE TO ADD THE CLASS TO TOGGLE IT 
+  // here we took out article-open from the class and only applied it via expand's event listener
+
